@@ -1,9 +1,11 @@
-for i in range(5):
-    if i == 2:
-        print('出问题了~~')
+# 以产品质量检查为例，一批产品中一旦出现一个不合格品，则判定此批产品报废； 全部通过检查则判定此批产品合格
+p = [1, 1, 0, 1, 1]
+for i in p:
+    if i == 0:
+        print('发现不合格品，判定 此批产品报废！')
         break
     else:
-        print('不错不错')
+        print('这件产品合格')
 else: # 只有当for顺利执行完毕，而没有break时，才会执行else 之后的语句！  
-    print('很好！') # 一旦break，本句就不执行
+    print('---此批产品合格！---') # 一旦break，本句就不执行
 print('End')
