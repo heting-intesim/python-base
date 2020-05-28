@@ -7,7 +7,8 @@ import random
 code = ''
 letters = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm0123456789'
 for i in range(4):
-    code += letters[random.randint(0,len(letters)-1)]
+    # code += letters[random.randint(0,len(letters)-1)]
+    code += random.choice(letters)
 print('验证码为：',code)
 answer = input('请输入验证码（不区分大小写）：')
 if answer.lower() == code.lower():
