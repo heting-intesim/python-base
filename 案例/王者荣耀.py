@@ -7,18 +7,27 @@
 6 退出游戏
 '''
 import random
-
+import os
 def main():
     print('*'*40)
     print(f'{"欢迎来到王者荣耀":^32}')
     print('*'*40)
-    roles = ['鲁班', '后羿', '李白', '孙尚香', '貂蝉', '诸葛亮']
-    role = roles[int(input('请选择人物：(1.鲁班 2.后羿 3.李白 4.孙尚香 5.貂蝉 6.诸葛亮)\n'))-1]
-    coins = 1000
     # 武器库
     weapons = [['屠龙刀',500],['火尖枪',600],['碧血剑',700],['天龙戟',1000]]
-    # 用户的武器列表
-    weapon_list = []
+    # 人物库
+    roles = ['鲁班', '后羿', '李白', '孙尚香', '貂蝉', '诸葛亮']
+
+    num = int(input('请选择人物：(1.鲁班 2.后羿 3.李白 4.孙尚香 5.貂蝉 6.诸葛亮)\n'))
+
+    # 读入选择的人物的数据存档
+    data_path = os.path.dirname(__file__)+'\\data.txt'
+    with open(data_path,'r',encoding='utf-8') as file:
+        for i in range(num-1):  # 根据选择的人物序号，readline之前的人物数据，直接读取选择的人物那一行
+            file.readline()
+        line = file.readline().strip().split(',')
+        role = line[0]
+        coins = int(line[1])    # 用户金币数
+        weapon_list = [] if line[2][1:-1] == '' else line[2][1:-1].split(',')   # 用户的武器列表
 
     print(f'欢迎 {role} ！\n当前金币是：{coins}')
     while True:
@@ -108,12 +117,33 @@ def main():
                     
         elif choice == '4':
             # 查看武器
-            print('  拥有以下武器：\n')
+            print('  拥有以下武器：')
             for i,v in enumerate(weapon_list):
                 print(i+1, v)
         elif choice == '5':
             # 退出游戏
             if input('  确定要离开游戏吗？(y/n)')=='y':
+                # 自动存档
+                with open(data_path,'r',encoding='utf-8') as file:
+                    lines = file.read()
+                i_n_qian = 0
+                i_n_hou = 0
+                for i in range(num):
+                    i_n_qian = i_n_hou
+                    index_n = lines.find('\n',i_n_qian+1)
+                    if index_n == -1:
+                        i_n_hou = len(lines)
+                    else:
+                        i_n_hou = index_n
+
+                yuanline = lines[i_n_qian:i_n_hou] if i_n_qian==0 else lines[i_n_qian+1:i_n_hou]
+                w_out = f'{weapon_list}'.replace("'",'')
+                newline = f'{role},{coins},{w_out}'
+                lines_new = lines.replace(yuanline,newline)
+
+                with open(data_path,'w',encoding='utf-8') as file:
+                    file.write(lines_new)
+                print('游戏已自动存档！')
                 print('Game Over')
                 break
             else:
