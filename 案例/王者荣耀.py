@@ -27,11 +27,11 @@ def main():
         line = file.readline().strip().split(',')
         role = line[0]
         coins = int(line[1])    # 用户金币数
-        weapon_list = [] if line[2][1:-1] == '' else line[2][1:-1].split(',')   # 用户的武器列表
+        weapon_list = [] if line[2][1:-1] == '' else line[2][1:-1].split(' ')   # 用户的武器列表
 
     print(f'欢迎 {role} ！\n当前金币是：{coins}')
     while True:
-        choice = input('请选择：\n 1.购买武器\n 2.打仗\n 3.卖出武器\n 4.查看武器\n 5.退出\n')
+        choice = input('【主界面】 请选择：\n 1.购买武器  2.打仗  3.卖出武器  4.查看武器  5.退出\n')
         
         if choice == '1':
             # 购买武器
@@ -64,7 +64,7 @@ def main():
             if weapon_list:
                 #如果有武器
                 #选择武器
-                print('  请选择以下已装备武器：\n')
+                print('  请选择以下已装备武器：')
                 for i,v in enumerate(weapon_list):
                     print(i+1, v)
                 w = int(input('  输入武器序号：\n'))
@@ -124,22 +124,35 @@ def main():
             # 退出游戏
             if input('  确定要离开游戏吗？(y/n)')=='y':
                 # 自动存档
+                lines_new=''
                 with open(data_path,'r',encoding='utf-8') as file:
-                    lines = file.read()
-                i_n_qian = 0
-                i_n_hou = 0
-                for i in range(num):
-                    i_n_qian = i_n_hou
-                    index_n = lines.find('\n',i_n_qian+1)
-                    if index_n == -1:
-                        i_n_hou = len(lines)
-                    else:
-                        i_n_hou = index_n
+                    # for i in range(num-1):  # 根据选择的人物序号，readline之前的人物数据，直接读取选择的人物那一行
+                    #     file.readline()
+                    for i in range(len(roles)):
+                        if i == num-1:
+                            w_out = f'{weapon_list}'.replace("'",'')
+                            lines_new += f'{role},{coins},{w_out}\n'
+                            file.readline()
+                        else:
+                            lines_new += file.readline()
 
-                yuanline = lines[i_n_qian:i_n_hou] if i_n_qian==0 else lines[i_n_qian+1:i_n_hou]
-                w_out = f'{weapon_list}'.replace("'",'')
-                newline = f'{role},{coins},{w_out}'
-                lines_new = lines.replace(yuanline,newline)
+
+                # with open(data_path,'r',encoding='utf-8') as file:
+                #     lines = file.read()
+                # i_n_qian = 0
+                # i_n_hou = 0
+                # for i in range(num):
+                #     i_n_qian = i_n_hou
+                #     index_n = lines.find('\n',i_n_qian+1)
+                #     if index_n == -1:
+                #         i_n_hou = len(lines)
+                #     else:
+                #         i_n_hou = index_n
+
+                # yuanline = lines[i_n_qian:i_n_hou] if i_n_qian==0 else lines[i_n_qian+1:i_n_hou]
+                # w_out = f'{weapon_list}'.replace("'",'')
+                # newline = f'{role},{coins},{w_out}'
+                # lines_new = lines.replace(yuanline,newline)
 
                 with open(data_path,'w',encoding='utf-8') as file:
                     file.write(lines_new)
