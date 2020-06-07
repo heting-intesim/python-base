@@ -60,6 +60,7 @@ def login():
     
     return user_r
 
+# 查看图书馆所有图书
 def show_book():
     # 读入books文件
     # 返回现有图书列表['三国','水浒'] 或[]
@@ -113,8 +114,7 @@ def borrow_book(user):
 
     print(f'借书 《{book}》 成功')
 
-
-#还书
+# 还书
 def return_book(user):
     '''
     传入用户名，自己持有的图书列表
@@ -156,6 +156,7 @@ def return_book(user):
     else:
         print('没有借出书籍，请去借书')
 
+# 主函数
 def main():
     print('*'*30,'欢迎进入图书系统','*'*30)
     islogin = False
