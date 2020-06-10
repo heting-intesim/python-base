@@ -20,3 +20,6 @@ s = '''春江花月夜
 不知乘月几人归，落月摇情满江树。'''
 bs = base64.b64encode(s.encode('utf-8'))
 print(bs)
+
+sb = base64.b64decode(bs)
+print(sb.decode('utf-8'))
