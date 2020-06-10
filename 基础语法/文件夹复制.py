@@ -16,7 +16,7 @@ path = r'd:\temple\files'  # 指定要删除的文件夹
 files = os.listdir(path)  # 列出文件夹下所有的文件
 print(files)
 for f in files:
-    os.remove(os.path.join(path,f))
+    os.remove(os.path.join(path,f))  # 逐个删除文件， 遇到文件夹时出错
 else:
-    os.rmdir(path)
+    os.rmdir(path)  # 删除文件夹！
     print('删除完毕！')
