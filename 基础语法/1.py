@@ -23,3 +23,6 @@ print(bs)
 
 sb = base64.b64decode(bs)
 print(sb.decode('utf-8'))
+
+import secrets
+print(secrets.base64.)
