@@ -1,4 +1,15 @@
 import os
+# 书
+class Book:
+    def __init__(self,name,author,status): # 书名、作者、借出状态
+        self.name = name
+        self.author = author
+        self.status = status
+    def __eq__(self, other): # 自定义 book对象相等的条件
+        return self.__dict__ == other.__dict__
+    def __str__(self):
+        return f'self.name'
+# 读者
 class Reader:
     def __init__(self, name):
         self.name = name
@@ -19,19 +30,11 @@ class Reader:
             bookbase.huan(book,self)
             self.books.remove(book.name)
             print(f'借书{book.name} 成功')
-
-class Book:
-    def __init__(self,name,author):
-        self.name = name
-        self.author = author
-    def __eq__(self, other): # 自定义 book对象相等的条件
-        return self.__dict__ == other.__dict__
-    def __str__(self):
-        return self.name
-
+# 图书库
 class BookBase:
     def __init__(self):
         self.book_list = []
+    # 利用文件books2.txt 初始化book_list
     def init_from_file(self, file):
         try:
             with open(file, 'r',encoding='utf-8') as file:
