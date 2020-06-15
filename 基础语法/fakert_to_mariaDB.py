@@ -10,7 +10,7 @@ for i in range(100):
     dict1['address'] = init.address()
     persons.append(dict1)
 
-conn = pymysql.connect('localhost',user='root',passwd='123456',db='test')
+conn = pymysql.connect('localhost',user='root',passwd='123456',db='mybase')
 # 获取游标
 cursor = conn.cursor()
 # 创建表
