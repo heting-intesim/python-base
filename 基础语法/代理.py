@@ -1,7 +1,7 @@
 import urllib.request,urllib.parse
 
 # 高级功能首先创建handler
-handler = urllib.request.ProxyHandler({'http':'163.125.223.102:8088',})
+handler = urllib.request.ProxyHandler({'http':'163.125.223.102:8088',}) # 此处写入可用的代理服务器ip信息
 # 创建opener
 opener = urllib.request.build_opener(handler)
 
