@@ -19,13 +19,16 @@ import pygame
 #     elif event.key == pygame.K_LEFT:
 #         ship.moving_left = False
 
-def check_events():
+def check_events(dishes):
     '''响应按键和鼠标事件'''
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit(0) # 此处必须带有参数0
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             sys.exit(0)
+        elif event.type == pygame.KEYDOWN and event.key == pygame.K_m: # 运动测试
+            dishes[-1].ismove = True
+            # dishes[-2].ismove = True
         # elif event.type == pygame.KEYDOWN:
         #     check_keydown_events(event,ai_settings,screen,ship,bullets)
         # elif event.type == pygame.KEYUP:
@@ -35,18 +38,20 @@ def update_screen(setting, screen, dishes):
     '''更新屏幕上的图像，并切换到新屏幕'''
     # 每次循环都重绘屏幕
     screen.fill(setting.bg_color)
-    # ship.blitme()
-    # 在移动盘子之后重绘所有盘子
-    for dish in dishes.sprites():
-        dish.draw_dish()
+
+    # # 在移动盘子之后重绘所有盘子
+    for dish in dishes:
+        dish.blitme()
     # 让最近的绘图屏幕可见
     pygame.display.flip()
 
-def update_dishes(dishes):
-    '''更新盘子的位置'''
-    dishes.update()
+# def update_dishes(dishes):
+#     '''更新盘子的位置'''
+#     dishes.update()
 
-
+def move_disk(dishes):
+    dishes[-1].move()
+    dishes[-1].blitme()
 # def fire_bullet(ai_settings, screen, ship, bullets):
 #     '''如果还没有到达限制数量，则发射一颗子弹'''
 #     if len(bullets) < ai_settings.bullet_allowed:

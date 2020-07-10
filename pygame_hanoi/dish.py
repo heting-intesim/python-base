@@ -22,13 +22,25 @@ class Dish(Sprite):
         self.rect.bottom = self.pos_y
         self.rect.centerx = self.pos_x
 
+        # 存储小数表示盘子的位置
+        self.y = float(self.rect.y)
+
     def update(self):
-        '''向上移动子弹'''
-        # # 更新表示盘子位置的小数值
-        # self.x = self.speed_factor
-        # # 更新表示子弹的rect的位置
+        '''向上移动盘子'''
+        # # 更新表示盘子y位置的小数值
+        # if self.y >=100:
+        #     self.y -= 1.5
+        # # # 更新表示盘子的rect的位置
         # self.rect.y = self.y
         pass
+
+    def move(self):
+        '''向上移动盘子'''
+        # # 更新表示盘子y位置的小数值
+        if self.y >=100:
+            self.y -= 1.5
+        # # # 更新表示盘子的rect的位置
+        self.rect.y = self.y
 
     def draw_dish(self):
         '''在屏幕上绘制子弹'''

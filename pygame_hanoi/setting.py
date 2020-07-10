@@ -8,3 +8,9 @@ dishes_n = 3
 dish_width_0 = 200
 dish_height = 40
 dish_color = 60,60,60
+
+# 杆子设置
+pole_1_posx = 150
+pole_2_posx = 300
+pole_3_posx = 450
+
