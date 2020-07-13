@@ -2,29 +2,22 @@ import pygame
 
 class Dish():
     '''一个对汉诺塔上的盘子进行管理的类'''
-    def __init__(self, screen, setting, pos_x, pos_y,width):
+    def __init__(self, screen, setting, gan, width):
         '''创建一个盘子对象'''
         self.screen = screen
-        self.pos_x = pos_x
-        self.pos_y = pos_y
+        self.gan = gan
         self.width = width
 
         self.ismove = False
         self.isturn = False
-
-        # 位于哪个杆子，共三个，编号分别为1，2，3
-        self.pole = 1
 
         # 设置盘子颜色
         self.color = setting.dish_color
 
         # 在（0，0）处创建一个表示盘子的矩形，再设置正确的位置
         self.rect = pygame.Rect(0,0,self.width,setting.dish_height)
-        
-        # self.screen_rect = screen.get_rect()
-        # self.rect.bottom = self.screen_rect.bottom
-        self.rect.bottom = self.pos_y
-        self.rect.centerx = self.pos_x
+        self.rect.bottom = setting.screen_height-len(self.gan.dishes)*setting.dish_height
+        self.rect.centerx = self.gan.pos_c
 
         # 存储小数表示盘子的位置
         self.x = float(self.rect.x)

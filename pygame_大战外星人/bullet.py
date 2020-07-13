@@ -1,5 +1,6 @@
 import pygame
 from pygame.sprite import Sprite
+import pygame.freetype
 
 class Bullet(Sprite):
     '''一个对飞船发射的子弹进行管理的类'''
@@ -9,9 +10,12 @@ class Bullet(Sprite):
         self.screen = screen
 
         # 在（0，0）处创建一个表示子弹的矩形，再设置正确的位置
-        self.rect = pygame.Rect(0,0,ai_settings.bullet_width,ai_settings.bullet_height)
+        # self.rect = pygame.Rect(0,0,ai_settings.bullet_width,ai_settings.bullet_height)
+        self.f1 = pygame.freetype.Font(r'c:\windows\Fonts\msyh.ttc',10)
+        self.surf, self.rect = self.f1.render('杀',fgcolor=(255,0,0),size=100)
         self.rect.centerx = ship.rect.centerx
         self.rect.top = ship.rect.top
+        # self.pos = 
 
         # 存储小数表示子弹的位置
         self.y = float(self.rect.y)
@@ -27,4 +31,6 @@ class Bullet(Sprite):
 
     def draw_bullet(self):
         '''在屏幕上绘制子弹'''
-        pygame.draw.rect(self.screen, self.color,self.rect)
+        # pygame.draw.rect(self.screen, self.color,self.rect)
+        # self.f1.render_to(self.screen,self.pos,'杀',fgcolor=(255,0,0),size=30)
+        self.screen.blit(self.surf,self.rect)
