@@ -2,6 +2,7 @@ import pygame,sys
 from settings import Settings
 import pygame.freetype
 from wave import Wave
+from ant import Ant
 
 def main():
     pygame.init()
@@ -12,6 +13,7 @@ def main():
     pygame.display.set_caption("水波")
 
     font1 = pygame.freetype.Font(r'C:\Windows\Fonts\msyh.ttc', 36)
+    ant = Ant(screen, settings, (50,50), 10)
 
     fps = 10
     fclock = pygame.time.Clock()
@@ -35,6 +37,8 @@ def main():
             w.blitme()
         except Exception as e:
             pass
+        ant.move()
+        ant.blitme()
         pygame.display.update()
         fclock.tick(fps)
 
