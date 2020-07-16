@@ -13,9 +13,9 @@ def main():
     pygame.display.set_caption("水波")
 
     font1 = pygame.freetype.Font(r'C:\Windows\Fonts\msyh.ttc', 36)
-    ant = Ant(screen, settings, (50,50), 10)
+    ant = Ant(screen, settings, (400,300), 10)
 
-    fps = 10
+    fps = 50
     fclock = pygame.time.Clock()
 
     # 开始游戏主循环
