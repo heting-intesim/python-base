@@ -2,13 +2,13 @@ import socket
 def send_msg():
     upd_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     # 绑定本地信息
-    upd_socket.bind(('', 8080))
+    # upd_socket.bind(('', 8080))
     while True:
         send_data = input('请输入想要发送的信息：\n')
         if send_data == 'exit':
             break
         # 发送数据，如果没有绑定本地信息，首次发送系统随机赋予一个本地端口值
-        upd_socket.sendto(send_data.encode('utf-8'), ('192.168.31.93',1090))
+        upd_socket.sendto(send_data.encode('utf-8'), ('192.168.16.104',8080))
     upd_socket.close()
 
 def get_msg():
